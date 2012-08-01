@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  song_id: 1
+  section: MyString
+  order: 1
+  note_id: 1
+
+two:
+  song_id: 1
+  section: MyString
+  order: 1
+  note_id: 1

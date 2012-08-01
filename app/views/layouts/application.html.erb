@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MusicAppC</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device=width, intial-scale=1.0	">
+</head>
+<body>
+<div class='navbar navbar-fixed-top'>
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"> </span>
+			</a>
+			<a class="brand" href= "/songs">Mixd Up</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><%= link_to "Songs", songs_path %></li>
+						<li><%= link_to "Song Structures", song_structures_path %></li>
+						<li><%= link_to "Notes", notes_path %></li>
+
+					</ul>
+				</div>	
+		</div>
+	</div>
+</div>
+	
+<div class="container">
+		<div class ="row">
+			<div class="span10 offset1">
+				<%= yield %>
+			</div>
+			
+		</div>
+</div>
+</body>
+</html>
