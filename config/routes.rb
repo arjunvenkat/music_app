@@ -1,4 +1,6 @@
 MusicAppC::Application.routes.draw do
+  resources :users
+
   root :to => 'songs#index'
   
   resources :song_structures
