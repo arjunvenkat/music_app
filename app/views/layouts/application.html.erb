@@ -28,7 +28,12 @@
 		</div>
 	</div>
 </div>
-	<%= link_to "Sign in with Google", "/auth/google_oauth2"%>
+	<% if session[:user_id] == nil%>
+		<%= link_to "Sign in with Google", "/auth/google_oauth2"%>
+	<% else %>
+		<%= "Signed in as #{User.find_by_uid(session[:user_id]).name}"%>
+		<p><%= link_to "Sign out", "/signout"%></p>
+	<% end%>
 <div class="container">
 		<div class ="row">
 			<div class="span10 offset1">
