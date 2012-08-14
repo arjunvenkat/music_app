@@ -3,4 +3,43 @@
   <h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
                                    :default => "Edit #{model_class.model_name.human}") %></h1>
 </div>
-<%= render :partial => 'form' %>
+
+<%= form_tag "/song_structures/#{@song_structure.id}", :method => 'put'  do %>
+  <div class="control-group">
+    <%= label_tag(:song_id, "Song") %>
+    <div class="controls">
+      <%= select_tag(:song_id, options_for_select(@songs_info), :include_blank => true) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag(:section, "Section") %>
+    <div class="controls">
+      <%= select_tag(:section, options_for_select(@sections), :include_blank => true) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag(:order, "Order") %>
+    <div class="controls">
+      <%= number_field_tag :order, @song_structure.order %>	
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag(:note_name, "Note") %>
+    <div class="controls">
+      <%= select_tag(:note_name, options_for_select(@notes), :include_blank => true)%>
+    </div>
+  </div>
+
+ 	<div class="control-group">
+    <%= label_tag(:note_form, "Type") %>
+    <div class="controls">
+      <%= select_tag(:note_form, options_for_select(@note_forms), :include_blank => true)%>
+    </div>
+  </div>
+
+  <p>
+     <%= submit_tag("Submit", :class => 'btn btn-primary') %>
+		 <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		                song_structures_path, :class => 'btn' %>
+  </p>
+<% end %>

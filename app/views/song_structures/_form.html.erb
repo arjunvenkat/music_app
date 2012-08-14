@@ -1,32 +1,40 @@
-<%= form_for @song_structure, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_tag "/song_structures"  do %>
   <div class="control-group">
-    <%= f.label :song_id, :class => 'control-label' %>
+    <%= label_tag(:song_id, "Song") %>
     <div class="controls">
-      <%= f.collection_select(:song_id, Song.all,:id,:name, :class => 'number_field') %>
+      <%= select_tag(:song_id, options_for_select(@songs_info)) %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :section, :class => 'control-label' %>
+    <%= label_tag(:section, "Section") %>
     <div class="controls">
-      <%= f.text_field(:section, :class => 'text_field') %>
+      <%= select_tag(:section, options_for_select(@sections)) %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :order, :class => 'control-label' %>
+    <%= label_tag(:order, "Order") %>
     <div class="controls">
-      <%= f.number_field :order, :class => 'number_field' %>
+      <%= number_field_tag :order %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :note_id, :class => 'control-label' %>
+    <%= label_tag(:note_name, "Note") %>
     <div class="controls">
-      <%= f.collection_select(:note_id, Note.where("form" => "major"), :id, :name, :class => 'number_field') %>
+      <%= select_tag(:note_name, options_for_select(@notes))%>
     </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                song_structures_path, :class => 'btn' %>
+ 	<div class="control-group">
+    <%= label_tag(:note_form, "Type") %>
+    <div class="controls">
+      <%= select_tag(:note_form, options_for_select([["major", "major"],["minor", "minor"]]))%>
+    </div>
   </div>
+
+  <p>
+     <%= submit_tag("Submit", :class => 'btn btn-primary') %>
+		 <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		                song_structures_path, :class => 'btn' %>
+  </p>
 <% end %>
+

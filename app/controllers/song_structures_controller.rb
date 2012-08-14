@@ -24,7 +24,10 @@ class SongStructuresController < ApplicationController
   # GET /song_structures/new
   # GET /song_structures/new.json
   def new
-    @song_structure = SongStructure.new
+    @notes = note_array()
+    @note_forms = note_form_array()
+    @songs_info = songs_info()
+    @sections = section_array()
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +38,21 @@ class SongStructuresController < ApplicationController
   # GET /song_structures/1/edit
   def edit
     @song_structure = SongStructure.find(params[:id])
+    @notes = note_array()
+    @note_forms = note_form_array()
+    @songs_info = songs_info()
+    @sections = section_array()
   end
 
   # POST /song_structures
   # POST /song_structures.json
   def create
-    @song_structure = SongStructure.new(params[:song_structure])
-
+    @song_structure = SongStructure.new#(params[:song_structure])
+    @song_structure.song_id = params["song_id"]
+    @song_structure.order = params["order"]
+    @song_structure.section = params["section"] 
+    @song_structure.note_id = Note.where("name" => params["note_name"], "form" => params["note_form"]).first.id
+    #@song_structure.note_id = Note.where("name" => params["song_structure"]["song_id"]
     respond_to do |format|
       if @song_structure.save
         format.html { redirect_to @song_structure, notice: 'Song structure was successfully created.' }
@@ -56,7 +67,11 @@ class SongStructuresController < ApplicationController
   # PUT /song_structures/1
   # PUT /song_structures/1.json
   def update
-    @song_structure = SongStructure.find(params[:id])
+    @song_structure = SongStructure.find_by_id(params["song_id"])
+    @song_structure.order = params["order"]
+    @song_structure.section = params["section"]
+    @song_structure.note_id = Note.where("name" => params["note_name"], "form" => params["note_form"]).first.id
+    @song_structure.save
 
     respond_to do |format|
       if @song_structure.update_attributes(params[:song_structure])

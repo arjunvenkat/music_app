@@ -1,15 +1,12 @@
 <%- model_class = Song -%>
+<h3>Showing songs in key of <%=  @key_name %> <%= @key_form%></h3>
 
-</br>
 <%= form_tag "/filter" do %>
 		<%= label_tag(:key_name, "Filter by key")%>
 		<%= select_tag(:key_name, options_for_select(@notes)) %>
 		<%= select_tag(:key_form, options_for_select([["major", "major"],["minor", "minor"]])) %>
 		<%= submit_tag "Filter"%>
 <% end %>
-
-
-
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>

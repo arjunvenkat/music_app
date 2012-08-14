@@ -10,13 +10,13 @@
 Note.destroy_all
 
 
-["none", "C", "C sharp", "D", "D sharp", "E", "F", "F sharp", "G", 
+["C", "C sharp", "D", "D sharp", "E", "F", "F sharp", "G", 
   "G sharp", "A", "A sharp", "B"].each do |note|
   Note.create(name: note, form: "major")
 end
 
 
-["none", "C", "C sharp", "D", "D sharp", "E", "F", "F sharp", "G", 
+["C", "C sharp", "D", "D sharp", "E", "F", "F sharp", "G", 
   "G sharp", "A", "A sharp", "B"].each do |note|
   Note.create(name: note, form: "minor")
 end

@@ -3,4 +3,75 @@
   <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %></h1>
 </div>
-<%= render :partial => 'form' %>
+
+<%= form_tag "/songs" do %>
+  <div class="control-group">
+    <%= label_tag(:song_name, "Name") %>
+    <div class="controls">
+      <%= text_field_tag(:song_name) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag(:song_bpm, "BPM") %>
+    <div class="controls">
+      <%= number_field_tag(:song_bpm) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= label_tag(:key_name, "Key") %>
+    <div class="controls">
+      <%= select_tag(:key_name, options_for_select(@notes)) %>
+			<%= select_tag(:key_form, options_for_select(@note_forms)) %>
+    </div>
+  </div></br>
+	
+	<% count = 1%>
+	<% @num_verse_chords.to_i.times do %>
+		<div class="control-group">
+	    <%= label_tag("verse#{count}_name", "Verse chord #{count}") %>
+	    <div class="controls">
+	      <%= select_tag("verse#{count}_name", options_for_select(@notes)) %>
+				<%= select_tag("verse#{count}_form", options_for_select(@note_forms)) %>
+	    </div>
+	  </div>
+		<% count += 1%>
+	<% end %>
+	<p><%= link_to "Add verse chord", "/songs/new/#{@num_verse_chords}/#{@num_chorus_chords}/#{@num_bridge_chords}/verse" %></p></br>
+	
+	
+	<% count = 1%>
+	<% @num_chorus_chords.to_i.times do %>
+		<div class="control-group">
+	    <%= label_tag("chorus#{count}_name", "Chorus chord #{count}") %>
+	    <div class="controls">
+	      <%= select_tag("chorus#{count}_name", options_for_select(@notes)) %>
+				<%= select_tag("chorus#{count}_form", options_for_select(@note_forms)) %>
+	    </div>
+	  </div>
+		<% count += 1%>
+	<% end %>
+	<p><%= link_to "Add chorus chord", "/songs/new/#{@num_verse_chords}/#{@num_chorus_chords}/#{@num_bridge_chords}/chorus" %></p></br>
+	
+	
+	<% count = 1%>
+	<% @num_bridge_chords.to_i.times do %>
+		<div class="control-group">
+	    <%= label_tag("bridge#{count}_name", "Bridge chord #{count}") %>
+	    <div class="controls">
+	      <%= select_tag("bridge#{count}_name", options_for_select(@notes)) %>
+				<%= select_tag("bridge#{count}_form", options_for_select(@note_forms)) %>
+	    </div>
+	  </div>
+		<% count += 1%>
+	<% end %>
+	<p><%= link_to "Add bridge chord", "/songs/new/#{@num_verse_chords}/#{@num_chorus_chords}/#{@num_bridge_chords}/bridge" %></p>
+	
+
+
+  <div class="form-actions">
+    <%= submit_tag("Submit song", :class => 'btn btn-primary') %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                songs_path, :class => 'btn' %>
+  </div>
+<% end %>

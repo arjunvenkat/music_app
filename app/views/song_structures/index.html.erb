@@ -21,7 +21,7 @@
         <td><%= song_structure.song.name %></td>
         <td><%= song_structure.section %></td>
         <td><%= song_structure.order %></td>
-        <td><%= song_structure.note_id %></td>
+        <td><%= song_structure.note.name %> <%= song_structure.note.form%></td>
         <td><%=l song_structure.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

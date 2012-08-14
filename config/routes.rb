@@ -11,7 +11,11 @@ MusicAppC::Application.routes.draw do
   
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
-  match 'signout', to: 'sessions#destroy', as: 'signout'
+  match '/signout', to: 'sessions#destroy', as: 'signout'
+  
+  post '/filter' => 'songs#filter'
+  
+  get '/songs/new/:num_verse_chords/:num_chorus_chords/:num_bridge_chords/:which_form' => 'songs#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
